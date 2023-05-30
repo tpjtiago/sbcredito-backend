@@ -77,5 +77,13 @@ namespace SBcredito.API.Controllers
 
             return Ok(model);
         }
+
+        //Teste Middleware - trativa erros globalmente em toda a aplicação
+        [HttpGet("erro-middleware")]
+        public IActionResult SimularErro()
+        {
+            throw new Exception("Ocorreu um erro durante o processamento.");
+        }
+
     }
 }

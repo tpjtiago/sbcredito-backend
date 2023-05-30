@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using SBcredito.API.Configuration;
 using SBcredito.Data.Contexts;
@@ -21,6 +22,10 @@ AutoMapperConfiguration.AddAutoMapper(builder);
 
 builder.Services.AddCors();
 
+builder.Services
+    .AddControllersWithViews()
+    .AddFluentValidation();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,6 +45,8 @@ app.UseCors(c =>
 });
 
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.MapControllers();
 
